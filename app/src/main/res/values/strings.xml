@@ -6,4 +6,5 @@
     <string name="cancel">Cancel</string>
     <string name="ok">OK</string>
     <string name="error_camera_permission">This application cannot run because it does not have the camera permission. This application will now exit.</string>
+    <string name="scan_result">Scan Result</string>
 </resources>

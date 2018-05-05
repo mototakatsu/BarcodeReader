@@ -43,6 +43,15 @@ public class MainActivity extends AppCompatActivity implements Detector.Processo
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        if (mCameraSource != null) {
+            mCameraSource.stop();
+            mCameraSource.release();
+        }
+        super.onDestroy();
+    }
+
     private void requestCameraPermission() {
         final String[] permissions = new String[]{Manifest.permission.CAMERA};
 
@@ -77,7 +86,6 @@ public class MainActivity extends AppCompatActivity implements Detector.Processo
             @Override
             public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
                 mCameraSource.stop();
-                mCameraSource.release();
             }
         });
     }
@@ -132,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements Detector.Processo
         if (detections.getDetectedItems().size() > 0) {
             String displayValue = detections.getDetectedItems().valueAt(0).displayValue;
             Log.d(TAG, "displayValue: " + displayValue);
-            // TODO
+            startActivity(ResultActivity.createIntent(this, displayValue));
         }
     }
 
